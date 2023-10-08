@@ -13,7 +13,7 @@ const Hero = (props: Props) => {
       <BackgroundSquares />
       <div className="z-20 -mt-20 space-y-8">
         <Image
-          className="object-profile relative mx-auto h-36 w-36 rounded-full object-cover"
+          className="relative mx-auto h-36 w-36 rounded-full object-cover object-profile"
           src={profile_pic}
           alt="Profile Picture"
         />
@@ -38,7 +38,7 @@ const Hero = (props: Props) => {
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: [0, 0, 1], scale: [0, 0.5, 1] }}
-            transition={{ duration: 1, delay: 2.5, ease: "easeInOut" }}
+            transition={{ duration: 1, delay: 2, ease: "easeInOut" }}
             className="pt-5"
           >
             <Link href="#about">

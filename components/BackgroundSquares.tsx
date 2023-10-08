@@ -10,14 +10,14 @@ function BackgroundSquares() {
         opacity: [0.1, 0.2, 0.4, 0.8, 0.1, 1.0],
         borderRadius: ["20%", "20%", "50%", "80%", "20%"],
       }}
-      transition={{ duration: 2.5, ease: "easeInOut" }}
+      transition={{ duration: 2, ease: "easeInOut" }}
       className="relative mt-52 flex items-center justify-center"
     >
-      <div className="border-lightgray absolute aspect-square w-[200px] animate-ping rounded-full border" />
-      <div className="border-lightgray absolute aspect-square w-[300px] rounded-full border opacity-40" />
-      <div className="border-lightgray absolute aspect-square w-[500px] rounded-full border opacity-50" />
-      <div className="border-primary absolute aspect-square w-[650px] animate-pulse rounded-full border opacity-60" />
-      <div className="border-lightgray absolute aspect-square w-[800px] rounded-full border opacity-80" />
+      <div className="absolute aspect-square w-[200px] animate-ping rounded-full border border-lightgray" />
+      <div className="absolute aspect-square w-[300px] rounded-full border border-lightgray opacity-40" />
+      <div className="absolute aspect-square w-[500px] rounded-full border border-lightgray opacity-50" />
+      <div className="absolute aspect-square w-[650px] animate-pulse rounded-full border border-primary opacity-60" />
+      <div className="absolute aspect-square w-[800px] rounded-full border border-lightgray opacity-80" />
     </motion.div>
   );
 }
