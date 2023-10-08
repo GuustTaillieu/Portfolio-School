@@ -4,8 +4,8 @@ import { SocialIcon } from "react-social-icons";
 
 const socialMedia = [
   "https://www.instagram.com/zita.worm/",
-  "https://www.instagram.com/zita.worm/",
-  "https://www.instagram.com/zita.worm/",
+  "https://www.instagram.com/zita.worm/#",
+  "https://www.instagram.com/zita.worm/#a",
 ];
 
 type Props = {};
