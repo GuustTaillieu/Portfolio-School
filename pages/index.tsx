@@ -1,3 +1,4 @@
+import About from "@/components/About";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import { NextPage } from "next";
@@ -20,7 +21,7 @@ const Home: NextPage = () => {
 
         {/* ABOUT */}
         <section id="about" className="h-screen snap-center">
-          <h1>About</h1>
+          <About />
         </section>
 
         {/* EXPERIENCE */}
