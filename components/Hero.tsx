@@ -13,7 +13,7 @@ const Hero = (props: Props) => {
       <BackgroundSquares />
       <div className="z-20 -mt-20 space-y-8">
         <Image
-          className="relative mx-auto h-36 w-36 rounded-full object-cover object-profile"
+          className="relative mx-auto h-36 w-36 rounded-[10%] object-cover object-profile"
           src={profile_pic}
           alt="Profile Picture"
         />
