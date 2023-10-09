@@ -38,7 +38,7 @@ const About = (props: Props) => {
       >
         <h4 className="text-4xl font-semibold">
           Here is a{" "}
-          <span className="border-spacing-1 border-b-2 border-primary text-3xl italic">
+          <span className="border-spacing-1 border-b-2 border-primary/40 font-medium italic">
             little
           </span>{" "}
           background
