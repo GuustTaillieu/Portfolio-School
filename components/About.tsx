@@ -2,21 +2,16 @@ import Image from "next/image";
 import React from "react";
 import profile_pic from "@/public/images/profile.jpg";
 import { motion } from "framer-motion";
+import StandardLayout from "./StandardLayout";
 
 type Props = {};
 
 const About = (props: Props) => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 1, ease: "easeInOut" }}
+    <StandardLayout
+      title="About"
       className="relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-evenly px-10 text-center md:flex-row md:text-left"
     >
-      <h3 className="absolute top-24 text-2xl uppercase tracking-[20px] text-gray-500">
-        About
-      </h3>
-
       <motion.div
         initial={{ x: -200, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
@@ -52,7 +47,7 @@ const About = (props: Props) => {
           Officiis laborum quo dolores. Ipsa alias numquam adipisci.
         </p>
       </motion.div>
-    </motion.div>
+    </StandardLayout>
   );
 };
 
