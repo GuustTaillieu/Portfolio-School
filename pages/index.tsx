@@ -10,7 +10,7 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div className="z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll bg-background font-poppins text-white">
+    <div className="scrollbar-track-gray-400/30 scrollbar-thumb-primary/80 scrollbar-thin z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll bg-background font-poppins text-white">
       <Head>
         <title>Portfolio Zita</title>
       </Head>
