@@ -1,4 +1,5 @@
 import About from "@/components/About";
+import ContactMe from "@/components/ContactMe";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
@@ -9,7 +10,7 @@ import Head from "next/head";
 
 const Home: NextPage = () => {
   return (
-    <div className="z-0 h-screen snap-y snap-mandatory overflow-y-scroll bg-background font-poppins text-white">
+    <div className="z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll bg-background font-poppins text-white">
       <Head>
         <title>Portfolio Zita</title>
       </Head>
@@ -36,7 +37,9 @@ const Home: NextPage = () => {
           <Projects />
         </div>
 
-        {/* CONTACT */}
+        <div id="contact" className="snap-start">
+          <ContactMe />
+        </div>
       </main>
     </div>
   );
