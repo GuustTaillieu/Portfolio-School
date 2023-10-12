@@ -13,7 +13,7 @@ function WorkExperience({}: Props) {
       title="Experience"
       className="relative mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden px-10 text-left md:flex-row"
     >
-      <div className="flex w-full snap-x snap-mandatory space-x-5 overflow-x-scroll p-10">
+      <div className="scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80 flex w-full snap-x snap-mandatory space-x-5 overflow-x-scroll p-10">
         <ExperienceCard
           logo={logo_howest}
           role="Student"
