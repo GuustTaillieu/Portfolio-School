@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   const hero = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll bg-background font-poppins text-white scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">
+    <div className="scrollContainer z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll bg-background font-poppins text-white scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">
       <Head>
         <title>Portfolio Zita</title>
       </Head>
