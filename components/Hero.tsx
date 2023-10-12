@@ -1,13 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BackgroundSquares from "./BackgroundSquares";
 import Image from "next/image";
 import profile_pic from "@/public/images/profile.jpg";
-import Link from "next/link";
 import { motion } from "framer-motion";
 
 type Props = {};
 
 const Hero = (props: Props) => {
+  const buttons = React.useRef<HTMLButtonElement[]>([]);
+
+  useEffect(() => {
+    const handleLink = (e: MouseEvent) => {
+      e.preventDefault();
+      const target = e.currentTarget as HTMLAnchorElement;
+      const section = target.dataset.section;
+      window.history.pushState({}, "", `#${section}`);
+      const el = document.querySelector(`#${section}`);
+      console.log(el, section, target);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth" });
+    };
+    buttons?.current.forEach(
+      (btn) => btn?.addEventListener("click", handleLink),
+    );
+
+    return () => {
+      buttons?.current.forEach(
+        (btn) => btn?.removeEventListener("click", handleLink),
+      );
+    };
+  }, []);
+
   return (
     <div className="flex h-screen flex-col items-center justify-center overflow-hidden text-center">
       <BackgroundSquares />
@@ -41,18 +64,34 @@ const Hero = (props: Props) => {
             transition={{ duration: 1, delay: 2, ease: "easeInOut" }}
             className="pt-5"
           >
-            <Link href="#about">
-              <button className="heroBtn">About</button>
-            </Link>
-            <Link href="#experience">
-              <button className="heroBtn">Experience</button>
-            </Link>
-            <Link href="#skills">
-              <button className="heroBtn">Skills</button>
-            </Link>
-            <Link href="#projects">
-              <button className="heroBtn">Projects</button>
-            </Link>
+            <button
+              className="heroBtn"
+              ref={(btn) => buttons.current.push(btn!)}
+              data-section="about"
+            >
+              About
+            </button>
+            <button
+              className="heroBtn"
+              ref={(btn) => buttons.current.push(btn!)}
+              data-section="experience"
+            >
+              Experience
+            </button>
+            <button
+              className="heroBtn"
+              ref={(btn) => buttons.current.push(btn!)}
+              data-section="skills"
+            >
+              Skills
+            </button>
+            <button
+              className="heroBtn"
+              data-section="projects"
+              ref={(btn) => buttons.current.push(btn!)}
+            >
+              Projects
+            </button>
           </motion.div>
         </div>
       </div>
