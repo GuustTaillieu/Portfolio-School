@@ -1,8 +1,6 @@
 import React from "react";
 import StandardLayout from "./StandardLayout";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import profile_pic from "@/public/images/profile.jpg";
 import Project from "./Project";
 
 type Props = {};
@@ -20,7 +18,7 @@ const Projects = (props: Props) => {
       title="Projects"
       className="relative z-0 mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden text-left md:flex-row"
     >
-      <div className="scrollbar-track-gray-400/30 scrollbar-thumb-primary/80 scrollbar-thin relative z-20 flex w-full snap-x snap-mandatory overflow-y-hidden overflow-x-scroll">
+      <div className="relative z-20 flex w-full snap-x snap-mandatory overflow-y-hidden overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">
         {projects.map((project) => (
           <Project key={project.id.toString()} project={project} />
         ))}
