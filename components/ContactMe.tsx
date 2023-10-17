@@ -3,6 +3,7 @@ import StandardLayout from "./StandardLayout";
 import { PhoneIcon, EnvelopeIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import { SubmitHandler, useForm } from "react-hook-form";
 import emailjs from "@emailjs/browser";
+import { PageInfo } from "@/typings";
 
 type Inputs = {
   from_name: string;
@@ -11,9 +12,11 @@ type Inputs = {
   message: string;
 };
 
-type Props = {};
+type Props = {
+  info: PageInfo;
+};
 
-function ContactMe({}: Props) {
+function ContactMe({ info }: Props) {
   const emailStatus = useRef<true | false | null>(null);
   const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
@@ -51,17 +54,17 @@ function ContactMe({}: Props) {
         <div className="flex flex-col items-center space-y-6">
           <div className="flex items-center space-x-5">
             <PhoneIcon className="aspect-square w-7 animate-pulse justify-center text-primary" />
-            <p className="text-2xl">+32 666 66 66 66</p>
+            <p className="text-2xl">{info?.phoneNumber}</p>
           </div>
 
           <div className="flex items-center space-x-5">
             <EnvelopeIcon className="aspect-square w-7 animate-pulse justify-center text-primary" />
-            <p className="text-2xl">email@email.com</p>
+            <p className="text-2xl">{info?.email}</p>
           </div>
 
           <div className="flex items-center space-x-5">
             <MapPinIcon className="aspect-square w-7 animate-pulse justify-center text-primary" />
-            <p className="text-2xl">Cool Lane 123</p>
+            <p className="text-2xl">{info?.address}</p>
           </div>
         </div>
 

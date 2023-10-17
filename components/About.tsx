@@ -1,12 +1,18 @@
 import Image from "next/image";
 import React from "react";
-import profile_pic from "@/public/images/profile.jpg";
 import { motion } from "framer-motion";
 import StandardLayout from "./StandardLayout";
+import { PageInfo } from "@/typings";
+import { useNextSanityImage } from "next-sanity-image";
+import { client } from "@/sanity/lib/client";
 
-type Props = {};
+type Props = {
+  info: PageInfo;
+};
 
-const About = (props: Props) => {
+const About = ({ info }: Props) => {
+  const profilePicProps = useNextSanityImage(client, info.profilePicture);
+
   return (
     <StandardLayout
       title="About"
@@ -20,8 +26,11 @@ const About = (props: Props) => {
       >
         <Image
           className="h-full w-full rounded-full object-cover object-profile md:rounded-lg"
-          src={profile_pic}
           alt="Profile Picture"
+          {...profilePicProps}
+          layout="fixed"
+          placeholder="blur"
+          blurDataURL={info?.profilePicture?.asset.metadata?.lqip}
         />
       </motion.div>
 
@@ -38,14 +47,7 @@ const About = (props: Props) => {
           </span>{" "}
           background
         </h4>
-        <p className="text-base">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam tenetur
-          animi, explicabo consequuntur quaerat quisquam alias molestias nihil
-          temporibus, eos minus voluptates atque omnis ducimus cupiditate
-          dolores. Cum amet exercitationem, voluptatum deleniti possimus aperiam
-          voluptatibus eligendi dicta ex harum consectetur, aliquam sunt!
-          Officiis laborum quo dolores. Ipsa alias numquam adipisci.
-        </p>
+        <p className="text-base">{info?.backgroundInformation}</p>
       </motion.div>
     </StandardLayout>
   );

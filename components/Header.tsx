@@ -1,19 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { SocialIcon } from "react-social-icons";
-import Link from "next/link";
+import { Social } from "@/typings";
 
-const socialMedia = [
-  "https://www.instagram.com/zita.worm/",
-  "https://www.instagram.com/zita.worm/#",
-  "https://www.instagram.com/zita.worm/#a",
-];
+type Props = {
+  socials: Social[];
+};
 
-type Props = {};
-
-function Header({}: Props) {
-  const toContact = React.useRef<HTMLAnchorElement>(null);
-
+function Header({ socials }: Props) {
   function handleToContactClick(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
     const contactForm = document.getElementById("contact");
@@ -30,10 +24,10 @@ function Header({}: Props) {
         transition={{ duration: 1.5 }}
         className="flex flex-row items-center"
       >
-        {socialMedia.map((social) => (
+        {socials.map((social) => (
           <SocialIcon
-            url={social}
-            key={social}
+            url={social.link}
+            key={social._id}
             target="_blank"
             fgColor="gray"
             bgColor="transparent"

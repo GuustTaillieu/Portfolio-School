@@ -2,10 +2,15 @@ import React from "react";
 import StandardLayout from "./StandardLayout";
 import Skill from "./Skill";
 import logo_archicad from "@/public/images/icons/archicad_logo.png";
+import { Skill as SkillType } from "@/typings";
 
-type Props = {};
+type Props = {
+  skills: SkillType[];
+};
 
-function Skills({}: Props) {
+function Skills({ skills }: Props) {
+  console.log(skills);
+
   return (
     <StandardLayout
       title="Skills"
@@ -16,15 +21,13 @@ function Skills({}: Props) {
       </h3>
 
       <div className="grid grid-cols-4 gap-5">
-        {Array(16)
-          .fill(0)
-          .map((_, i) => (
-            <Skill
-              key={i}
-              logo={logo_archicad}
-              direction={i >= 8 ? "left" : "right"}
-            />
-          ))}
+        {skills?.map((skill, i) => (
+          <Skill
+            key={skill._id}
+            logo={skill.skillImage}
+            direction={i < Math.round(skills.length / 2) ? "left" : "right"}
+          />
+        ))}
       </div>
     </StandardLayout>
   );
