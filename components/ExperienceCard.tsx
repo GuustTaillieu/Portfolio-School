@@ -1,12 +1,15 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
+import { Image as ImgType, Technology } from "@/typings";
+import { useNextSanityImage } from "next-sanity-image";
+import { client } from "@/sanity/lib/client";
 
 type Props = {
-  logo: StaticImageData;
-  role: string;
+  logo: ImgType;
+  jobTitle: string;
   company: string;
-  usedTechs: { name: string; img: StaticImageData }[];
+  usedTechs: Technology[];
   workDates: {
     start: string;
     end: string;
@@ -16,14 +19,16 @@ type Props = {
 
 function ExperienceCard({
   logo,
-  role,
+  jobTitle,
   company,
   usedTechs,
   workDates,
   summaryPoints,
 }: Props) {
+  const logoProps = useNextSanityImage(client, logo);
+
   return (
-    <article className="flex w-[500px] flex-shrink-0 cursor-pointer snap-center flex-col items-center space-y-7 overflow-hidden rounded-lg bg-[#292929] p-10 opacity-40 transition-opacity duration-200 hover:opacity-100 md:w-[600px] xl:w-[900px]">
+    <article className="flex w-[500px] flex-shrink-0 cursor-pointer snap-center flex-col items-center space-y-7 overflow-hidden rounded-lg bg-[#292929] p-10 transition-opacity duration-200 hover:opacity-100 md:w-[600px] md:opacity-40 xl:w-[900px]">
       <motion.div
         initial={{ opacity: 0, y: -100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -33,8 +38,11 @@ function ExperienceCard({
       >
         <Image
           className="h-full w-full object-cover object-center"
-          src={logo}
           alt="Howest Logo"
+          {...logoProps}
+          layout="fixed"
+          placeholder="blur"
+          blurDataURL={logo?.asset.metadata?.lqip}
         />
       </motion.div>
 
@@ -45,17 +53,22 @@ function ExperienceCard({
         viewport={{ once: true, amount: 0.6 }}
         className="px-0 md:px-10"
       >
-        <h4 className="text-4xl font-light">{role}</h4>
+        <h4 className="text-4xl font-light">{jobTitle}</h4>
         <p className="mt-1 text-2xl font-bold uppercase text-primary">
           {company}
         </p>
         <div className="my-2 flex space-x-2">
           {usedTechs.map((tech) => (
             <Image
-              className="aspect-square w-10 rounded-full"
-              src={tech.img}
-              alt={tech.name}
-              key={tech.name}
+              className="aspect-square w-10"
+              alt={tech.skillTitle}
+              key={tech._id}
+              src={tech?.skillImage?.asset?.url}
+              width={tech?.skillImage?.asset?.metadata?.dimensions?.width}
+              height={tech?.skillImage?.asset?.metadata?.dimensions?.height}
+              layout="fixed"
+              placeholder="blur"
+              blurDataURL={logo?.asset.metadata?.lqip}
             />
           ))}
         </div>

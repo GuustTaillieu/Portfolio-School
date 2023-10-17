@@ -1,26 +1,21 @@
 import React from "react";
 import StandardLayout from "./StandardLayout";
-import { motion } from "framer-motion";
 import Project from "./Project";
+import { Project as ProjectType } from "@/typings";
 
-type Props = {};
+type Props = {
+  projects: ProjectType[];
+};
 
-const Projects = (props: Props) => {
-  const projects = [
-    { id: 1, name: "Project 1" },
-    { id: 2, name: "Project 2" },
-    { id: 3, name: "Project 3" },
-    { id: 4, name: "Project 4" },
-    { id: 5, name: "Project 5" },
-  ];
+const Projects = ({ projects }: Props) => {
   return (
     <StandardLayout
       title="Projects"
       className="relative z-0 mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden text-left md:flex-row"
     >
       <div className="relative z-20 flex w-full snap-x snap-mandatory overflow-y-hidden overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">
-        {projects.map((project) => (
-          <Project key={project.id.toString()} project={project} />
+        {projects?.map((project) => (
+          <Project key={project._id} project={project} />
         ))}
       </div>
 
