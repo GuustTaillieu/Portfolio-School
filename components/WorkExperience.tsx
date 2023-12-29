@@ -23,6 +23,7 @@ function WorkExperience({ experiences }: Props) {
             jobTitle={experience?.jobTitle}
             company={experience?.companyName}
             usedTechs={experience?.technologies}
+            experienceType={experience?.experienceType}
             workDates={{
               start: experience?.dateStarted,
               end: experience?.isCurrentlyWorkingHere

@@ -22,7 +22,7 @@ const About = ({ info }: Props) => {
         initial={{ x: -200, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut" }}
-        className="md:h-95 -mb-24 h-56 w-56 flex-shrink-0 md:mb-0 md:h-72 md:w-64 xl:h-[600px] xl:w-[500px]"
+        className="md:h-95 -mb-24 h-56 w-56 flex-shrink-0 md:mb-0 md:h-72 md:w-64 xl:h-[500px] xl:w-[400px]"
       >
         <Image
           className="h-full w-full rounded-full object-cover object-profile md:rounded-lg"

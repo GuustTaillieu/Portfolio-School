@@ -25,7 +25,9 @@ const LoadingScreen = () => {
         animate={{ opacity: 0 }}
         transition={{ duration: 0.2, delay: 0.8 }}
       >
-        <h1 className="mb-5 text-5xl font-bold text-white">Loading...</h1>
+        <h1 className="mb-5 text-2xl uppercase tracking-[20px] text-gray-500">
+          Loading
+        </h1>
         <p className="font-medium text-white">{percentage}</p>
         <div className="h-1 w-80 space-y-3 rounded-full bg-gray-400">
           <div

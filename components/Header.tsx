@@ -17,7 +17,7 @@ function Header({ socials }: Props) {
   }
 
   return (
-    <header className="sticky top-0 z-20 mx-auto flex max-w-7xl items-start justify-between p-5 xl:items-center">
+    <header className="sticky top-0 z-20 mx-auto flex justify-between p-5 xl:items-center">
       <motion.div
         initial={{ opacity: 0, x: -400 }}
         animate={{ opacity: 1, x: 0 }}

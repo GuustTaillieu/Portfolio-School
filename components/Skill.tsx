@@ -10,7 +10,7 @@ type Props = {
   direction?: "left" | "right";
 };
 
-function Skill({ logo, direction = "right" }: Props) {
+function Skill({ logo, direction = "right" }: Readonly<Props>) {
   const logoProps = useNextSanityImage(client, logo);
 
   return (
@@ -21,7 +21,7 @@ function Skill({ logo, direction = "right" }: Props) {
       transition={{ duration: 1, ease: "anticipate" }}
     >
       <Image
-        className="h-full w-full object-cover filter transition duration-300 ease-in-out group-hover:grayscale"
+        className="h-full w-full object-scale-down filter transition duration-300 ease-in-out group-hover:grayscale"
         alt="Skill"
         {...logoProps}
         layout="fixed"

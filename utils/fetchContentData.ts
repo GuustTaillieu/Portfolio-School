@@ -26,6 +26,14 @@ export const fetchProjects = async (): Promise<Project[]> => {
   return projects;
 };
 
+export const fetchProject = async (id: string): Promise<Project> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/projects/${id}`,
+  );
+  const { project }: { project: Project } = await res.json();
+  return project;
+};
+
 export const fetchPageInfo = async (): Promise<PageInfo> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/pageInfo`);
   const { pageInfo }: { pageInfo: PageInfo } = await res.json();

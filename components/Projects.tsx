@@ -5,12 +5,13 @@ import { Project as ProjectType } from "@/typings";
 
 type Props = {
   projects: ProjectType[];
+  title?: string;
 };
 
-const Projects = ({ projects }: Props) => {
+const Projects = ({ projects, title = "Events" }: Props) => {
   return (
     <StandardLayout
-      title="Projects"
+      title={title}
       className="relative z-0 mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden text-left md:flex-row"
     >
       <div className="relative z-20 flex w-full snap-x snap-mandatory overflow-y-hidden overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">

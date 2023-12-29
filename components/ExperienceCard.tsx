@@ -10,6 +10,7 @@ type Props = {
   jobTitle: string;
   company: string;
   usedTechs: Technology[];
+  experienceType: "work" | "education";
   workDates: {
     start: string;
     end: string;
@@ -22,9 +23,10 @@ function ExperienceCard({
   jobTitle,
   company,
   usedTechs,
+  experienceType,
   workDates,
   summaryPoints,
-}: Props) {
+}: Readonly<Props>) {
   const logoProps = useNextSanityImage(client, logo);
 
   return (
@@ -37,12 +39,12 @@ function ExperienceCard({
         className="aspect-square w-32 overflow-hidden rounded-full xl:w-[200px]"
       >
         <Image
-          className="h-full w-full object-cover object-center"
           alt="Howest Logo"
           {...logoProps}
           layout="fixed"
           placeholder="blur"
           blurDataURL={logo?.asset.metadata?.lqip}
+          className="h-full w-full object-cover object-center"
         />
       </motion.div>
 
@@ -60,7 +62,6 @@ function ExperienceCard({
         <div className="my-2 flex space-x-2">
           {usedTechs.map((tech) => (
             <Image
-              className="aspect-square w-10"
               alt={tech.skillTitle}
               key={tech._id}
               src={tech?.skillImage?.asset?.url}
@@ -69,15 +70,21 @@ function ExperienceCard({
               layout="fixed"
               placeholder="blur"
               blurDataURL={logo?.asset.metadata?.lqip}
+              className="aspect-square w-10 rounded-sm object-scale-down"
             />
           ))}
         </div>
         <p className="py-5 uppercase text-gray-300">
-          Started to work {workDates.start} - {workDates.end}
+          Started to {experienceType === "work" ? "work" : "study"}
+          {": "}
+          {workDates.start} - {workDates.end}
         </p>
-        <ul className="ml-5 list-disc space-y-4 text-lg">
+        <ul className="list-none space-y-4 text-sm">
           {summaryPoints.map((point) => (
-            <li key={point}>{point}</li>
+            <li key={point}>
+              <span className="text-primary">{"→ \t"}</span>
+              {point}
+            </li>
           ))}
         </ul>
       </motion.div>
