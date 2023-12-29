@@ -24,6 +24,17 @@ export default defineType({
       },
     }),
     defineField({
+      name: "experienceType",
+      title: "ExperienceType",
+      type: "string",
+      options: {
+        list: [
+          { title: "Work", value: "work" },
+          { title: "Education", value: "education" },
+        ],
+      },
+    }),
+    defineField({
       name: "dateStarted",
       title: "DateStarted",
       type: "date",

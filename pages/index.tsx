@@ -69,7 +69,7 @@ const Home: NextPage<Props> = ({
           <Skills skills={skills} />
         </section>
 
-        <div id="projects" className="snap-start">
+        <div id="events" className="snap-start">
           <Projects projects={projects} />
         </div>
 

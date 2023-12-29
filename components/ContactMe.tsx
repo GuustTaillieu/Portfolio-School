@@ -51,21 +51,40 @@ function ContactMe({ info }: Props) {
           <span className="border-b-2 border-primary/50">Let's talk.</span>
         </h4>
 
-        <div className="flex flex-col items-center space-y-6">
-          <div className="flex items-center space-x-5">
+        <div className="flex flex-col items-center space-y-4">
+          <a
+            href={"tel:" + info?.phoneNumber}
+            className="flex items-center space-x-5"
+          >
             <PhoneIcon className="aspect-square w-7 animate-pulse justify-center text-primary" />
-            <p className="text-2xl">{info?.phoneNumber}</p>
-          </div>
+            <p className="text-xl opacity-60 transition-opacity hover:opacity-100">
+              {info?.phoneNumber}
+            </p>
+          </a>
 
-          <div className="flex items-center space-x-5">
+          <a
+            href={"mailto:" + info?.email}
+            className="flex items-center space-x-5"
+          >
             <EnvelopeIcon className="aspect-square w-7 animate-pulse justify-center text-primary" />
-            <p className="text-2xl">{info?.email}</p>
-          </div>
+            <p className="text-xl opacity-60 transition-opacity hover:opacity-100">
+              {info?.email}
+            </p>
+          </a>
 
-          <div className="flex items-center space-x-5">
+          <a
+            href={
+              "https://www.google.com/maps/place/" +
+              info?.address.replace(" ", "+")
+            }
+            // https://www.google.com/maps/place/Pater+Omer+Devosstraat,+8510+Kortrijk
+            className="flex items-center space-x-5"
+          >
             <MapPinIcon className="aspect-square w-7 animate-pulse justify-center text-primary" />
-            <p className="text-2xl">{info?.address}</p>
-          </div>
+            <p className="text-xl opacity-60 transition-opacity hover:opacity-100">
+              {info?.address}
+            </p>
+          </a>
         </div>
 
         <form
@@ -97,11 +116,11 @@ function ContactMe({ info }: Props) {
           <textarea
             {...register("message")}
             placeholder="Message"
-            className="contactInput max-h-20 resize-y"
+            className="contactInput max-h-20 resize-y scrollbar-thin"
           />
           <button
             type="submit"
-            className="rounded-md bg-primary px-10 py-5 text-lg font-bold text-black"
+            className="rounded-md bg-primary px-4 py-2 text-lg font-semibold text-gray-800"
           >
             Submit
           </button>

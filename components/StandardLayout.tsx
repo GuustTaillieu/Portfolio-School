@@ -7,7 +7,7 @@ type Props = {
   className?: string;
 };
 
-function StandardLayout({ title, children, className = "" }: Props) {
+function StandardLayout({ title, children, className = "" }: Readonly<Props>) {
   return (
     <motion.div
       key={title}
@@ -17,7 +17,7 @@ function StandardLayout({ title, children, className = "" }: Props) {
       transition={{ duration: 1, ease: "easeInOut" }}
       className={className}
     >
-      <h3 className="absolute top-24 text-2xl uppercase tracking-[20px] text-gray-500">
+      <h3 className="absolute top-12 z-50 text-2xl uppercase tracking-[20px] text-gray-500">
         {title}
       </h3>
       {children}

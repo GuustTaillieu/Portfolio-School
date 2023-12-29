@@ -14,7 +14,7 @@ const config: Config = {
         primary: "#F7AB0A",
       },
       objectPosition: {
-        profile: "0 30%",
+        profile: "center 30%",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

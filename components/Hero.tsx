@@ -3,7 +3,6 @@ import BackgroundSquares from "./BackgroundSquares";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { PageInfo } from "@/typings";
-import { urlFor } from "@/sanity";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
 
@@ -102,10 +101,10 @@ const Hero = ({ info }: Props) => {
             </button>
             <button
               className="heroBtn"
-              data-section="projects"
               ref={(btn) => buttons.current.push(btn!)}
+              data-section="events"
             >
-              Projects
+              Events
             </button>
           </motion.div>
         </div>

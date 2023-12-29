@@ -1,15 +1,13 @@
 import React from "react";
-import { motion } from "framer-motion";
 import ExperienceCard from "./ExperienceCard";
 import StandardLayout from "./StandardLayout";
 import { Experience } from "@/typings";
-import { urlFor } from "@/sanity";
 
 type Props = {
   experiences: Experience[];
 };
 
-function WorkExperience({ experiences }: Props) {
+function WorkExperience({ experiences }: Readonly<Props>) {
   return (
     <StandardLayout
       title="Experience"
@@ -23,6 +21,7 @@ function WorkExperience({ experiences }: Props) {
             jobTitle={experience?.jobTitle}
             company={experience?.companyName}
             usedTechs={experience?.technologies}
+            experienceType={experience?.experienceType}
             workDates={{
               start: experience?.dateStarted,
               end: experience?.isCurrentlyWorkingHere

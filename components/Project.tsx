@@ -1,17 +1,16 @@
 import React from "react";
-import StandardLayout from "./StandardLayout";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import profile_pic from "@/public/images/profile.jpg";
 import { Project } from "@/typings";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
+import Link from "next/link";
 
 type Props = {
   project: Project;
 };
 
-function Project({ project }: Props) {
+function Project({ project }: Readonly<Props>) {
   const projectPicProps = useNextSanityImage(client, project?.image);
   return (
     <div
@@ -36,38 +35,22 @@ function Project({ project }: Props) {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 300 }}
+        initial={{ opacity: 0.3, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeInOut" }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.3 }}
         className="max-w-6xl space-y-5 px-0 md:px-10"
       >
-        <h4 className="text-center text-4xl font-semibold">
-          Case Study:{" "}
-          <span className="border-b-2 border-primary/50">{project?.title}</span>
-        </h4>
-
-        <div className="hidden w-full flex-row flex-wrap justify-center space-x-5 md:flex">
-          {project?.technologies?.map((tech) => (
-            <Image
-              className="aspect-square w-7"
-              alt={tech.skillTitle}
-              key={tech._id}
-              src={tech?.skillImage?.asset?.url}
-              width={tech?.skillImage?.asset?.metadata?.dimensions?.width}
-              height={tech?.skillImage?.asset?.metadata?.dimensions?.height}
-              layout="fixed"
-              placeholder="blur"
-              blurDataURL={tech?.skillImage?.asset.metadata?.lqip}
-            />
-          ))}
-        </div>
-
-        <p className="max-w-4xl pt-3 text-center text-lg md:text-left">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima
-          possimus rem cupiditate. Quis eum molestias pariatur eligendi natus
-          laudantium inventore molestiae quia quaerat et fugiat nostrum,
-          incidunt magnam, perferendis quisquam cupiditate deleniti ab sint!
+        <Link
+          href={`/projects/${project?._id}`}
+          className="block cursor-pointer text-center text-4xl font-semibold"
+        >
+          <span className="border-b-2 border-primary/50">
+            {project?.title} <span className="text-primary">→</span>
+          </span>
+        </Link>
+        <p className="max-w-4xl pt-3 text-center text-lg md:text-center">
+          {project?.summary || "No summary available."}
         </p>
       </motion.div>
     </div>
