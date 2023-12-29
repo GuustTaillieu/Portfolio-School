@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Project } from "@/typings";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 type Props = {
