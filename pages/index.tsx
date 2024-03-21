@@ -87,21 +87,21 @@ const Home: NextPage<Props> = ({
 
 export default Home;
 
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const pageInfo: PageInfo = await fetchPageInfo();
-  const projects: Project[] = await fetchProjects();
-  const skills: Skill[] = await fetchSkills();
-  const experiences: Experience[] = await fetchExperiences();
-  const socials: Social[] = await fetchSocials();
+// export const getStaticProps: GetStaticProps<Props> = async () => {
+//   // const pageInfo: PageInfo = await fetchPageInfo();
+//   // const projects: Project[] = await fetchProjects();
+//   // const skills: Skill[] = await fetchSkills();
+//   // const experiences: Experience[] = await fetchExperiences();
+//   // const socials: Social[] = await fetchSocials();
 
-  return {
-    props: {
-      pageInfo,
-      projects,
-      skills,
-      experiences,
-      socials,
-    },
-    revalidate: 10,
-  };
-};
+//   return {
+//     props: {
+//       pageInfo,
+//       projects,
+//       skills,
+//       experiences,
+//       socials,
+//     },
+//     revalidate: 10,
+//   };
+// };
