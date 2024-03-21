@@ -46,9 +46,9 @@ function ContactMe({ info }: Props) {
     >
       <div className="flex flex-col space-y-10">
         <h4 className="text-center text-4xl font-semibold">
-          I'm the asset you're looking for.
+          I&apos;m the asset you&apos;re looking for.
           <br />
-          <span className="border-b-2 border-primary/50">Let's talk.</span>
+          <span className="border-b-2 border-primary/50">Let&apos;s talk.</span>
         </h4>
 
         <div className="flex flex-col items-center space-y-4">

@@ -50,13 +50,13 @@ const ProjectPage: NextPage<Props> = ({
         setLoading(false);
       }, 1100);
     }
-  }, [pageInfo, project]);
+  }, [pageInfo, project, loading]);
 
   const nextProject = useMemo(() => {
     if (!projects) return [];
     const index = projects.findIndex((p) => p._id === project._id);
     return [projects[index + 1] ?? projects[0]];
-  }, [project]);
+  }, [projects, project]);
 
   if (!project) return <LoadingScreen />;
   return !loading ? (
@@ -70,8 +70,8 @@ const ProjectPage: NextPage<Props> = ({
         <div key={project._id} className="mt-24">
           <Carousel className="mx-auto w-full max-w-4xl">
             <CarouselContent>
-              {project.images.map((image, index) => (
-                <CarouselItem key={index}>
+              {project.images.map((image) => (
+                <CarouselItem key={image.asset._ref}>
                   <div className="p-1">
                     <Image
                       src={urlFor(image).height(500).url() ?? ""}
@@ -108,6 +108,7 @@ const ProjectPage: NextPage<Props> = ({
               <div className="max-w-4xl pt-3">
                 {project?.description.split("\n").map((text) => (
                   <p
+                    key={text}
                     className="mt-2 text-justify text-lg"
                     style={{
                       textAlign: "justify",

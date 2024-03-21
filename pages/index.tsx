@@ -43,7 +43,7 @@ const Home: NextPage<Props> = ({
         setLoading(false);
       }, 1100);
     }
-  }, [pageInfo, projects, skills, experiences, socials]);
+  }, [pageInfo, projects, skills, experiences, socials, loading]);
 
   return !loading ? (
     <div className="scrollContainer z-0 h-screen snap-y snap-mandatory overflow-x-hidden overflow-y-scroll bg-background font-poppins text-white scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">

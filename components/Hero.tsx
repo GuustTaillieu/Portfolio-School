@@ -11,10 +11,11 @@ type Props = {
 };
 
 const Hero = ({ info }: Props) => {
-  const buttons = React.useRef<HTMLButtonElement[]>([]);
   const heroPicProps = useNextSanityImage(client, info?.heroImage);
+  const buttons = React.useRef<HTMLButtonElement[]>([]);
 
   useEffect(() => {
+    const btns = buttons.current;
     const handleLink = (e: MouseEvent) => {
       e.preventDefault();
       const target = e.currentTarget as HTMLAnchorElement;
@@ -25,14 +26,10 @@ const Hero = ({ info }: Props) => {
       if (!el) return;
       el.scrollIntoView({ behavior: "smooth" });
     };
-    buttons?.current.forEach(
-      (btn) => btn?.addEventListener("click", handleLink),
-    );
+    btns.forEach((btn) => btn?.addEventListener("click", handleLink));
 
     return () => {
-      buttons?.current.forEach(
-        (btn) => btn?.removeEventListener("click", handleLink),
-      );
+      btns.forEach((btn) => btn?.removeEventListener("click", handleLink));
     };
   }, []);
 
