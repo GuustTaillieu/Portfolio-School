@@ -11,12 +11,35 @@ export default defineType({
       type: "string",
     }),
     defineField({
-      name: "image",
-      title: "Image",
+      name: "heroImage",
+      title: "Hero Image",
       type: "image",
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: "images",
+      title: "Images",
+      type: "array",
+      of: [
+        {
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: "date",
+      title: "Date",
+      type: "date",
+    }),
+    defineField({
+      name: "location",
+      title: "Location",
+      type: "string",
     }),
     defineField({
       name: "summary",
@@ -38,11 +61,6 @@ export default defineType({
           to: [{ type: "skill" }],
         },
       ],
-    }),
-    defineField({
-      name: "linkToProject",
-      title: "LinkToProject",
-      type: "url",
     }),
   ],
 });

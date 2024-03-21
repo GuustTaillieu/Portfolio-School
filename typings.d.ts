@@ -30,11 +30,13 @@ export interface Social extends SanityBody {
 
 export interface Project extends SanityBody {
   title: string;
+  heroImage: Image;
   summary: string;
-  linkToProject: string;
   technologies: Technology[];
-  image: Image;
+  images: Image[];
   description: string;
+  date: Date;
+  location: string;
 }
 
 export interface Skill extends SanityBody {

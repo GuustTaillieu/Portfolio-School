@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import LoadingScreen from "@/components/LoadingScreen";
-import { client } from "@/sanity/lib/client";
 import { PageInfo, Project } from "@/typings";
 import {
   fetchPageInfo,
@@ -15,11 +14,17 @@ import { motion } from "framer-motion";
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Projects from "@/components/Projects";
+import { HomeIcon } from "@heroicons/react/24/solid";
 import {
-  BackspaceIcon,
-  BackwardIcon,
-  HomeIcon,
-} from "@heroicons/react/24/solid";
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/Carousel";
+import { client } from "@/sanity/lib/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 type Props = {
   pageInfo: PageInfo;
@@ -33,7 +38,11 @@ const ProjectPage: NextPage<Props> = ({
   projects,
 }: Props) => {
   const [loading, setLoading] = useState(true);
-  const projectPicProps = useNextSanityImage(client, project.image);
+  const builder = imageUrlBuilder(client);
+
+  function urlFor(source: SanityImageSource) {
+    return builder.image(source);
+  }
 
   useEffect(() => {
     if (loading && pageInfo && project) {
@@ -44,9 +53,9 @@ const ProjectPage: NextPage<Props> = ({
   }, [pageInfo, project]);
 
   const nextProject = useMemo(() => {
-    if (!projects) return null;
+    if (!projects) return [];
     const index = projects.findIndex((p) => p._id === project._id);
-    return projects[index + 1] || projects[0];
+    return [projects[index + 1] ?? projects[0]];
   }, [project]);
 
   if (!project) return <LoadingScreen />;
@@ -58,15 +67,30 @@ const ProjectPage: NextPage<Props> = ({
       <main>
         <Header socials={pageInfo.socials} />
 
-        <div key={project._id} className="-mt-24">
-          <Image
-            {...projectPicProps}
-            alt={project.title}
-            layout="fixed"
-            placeholder="blur"
-            blurDataURL={project.image.asset.metadata.lqip}
-            className="h-full w-full rounded-md object-cover object-profile"
-          />
+        <div key={project._id} className="mt-24">
+          <Carousel className="mx-auto w-full max-w-4xl">
+            <CarouselContent>
+              {project.images.map((image, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <Image
+                      src={urlFor(image).height(500).url() ?? ""}
+                      alt={project.title}
+                      width={600}
+                      height={500}
+                      blurDataURL={
+                        urlFor(image).width(500).blur(20).url() ?? ""
+                      }
+                      className="mx-auto aspect-video rounded-md object-cover object-profile"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+
           <div className="flex w-full flex-col items-center justify-center space-y-5 px-20 md:px-44">
             <motion.div
               initial={{ opacity: 0, y: -50 }}
@@ -80,14 +104,26 @@ const ProjectPage: NextPage<Props> = ({
                   {project?.title}
                 </span>
               </h1>
-              <p className="max-w-4xl pt-3 text-center text-lg md:text-center">
-                {project?.description || "No description available."}
-              </p>
+
+              <div className="max-w-4xl pt-3">
+                {project?.description.split("\n").map((text) => (
+                  <p
+                    className="mt-2 text-justify text-lg"
+                    style={{
+                      textAlign: "justify",
+                      textJustify: "inter-word",
+                      textAlignLast: "center",
+                    }}
+                  >
+                    {text}
+                  </p>
+                )) ?? "No description available."}
+              </div>
             </motion.div>
           </div>
         </div>
         <div className="pt-10">
-          <Projects projects={projects} title="Other events" />
+          <Projects projects={nextProject} title="Other events" />
         </div>
 
         <Link href="/" className="absolute bottom-10 left-10" title="Back home">

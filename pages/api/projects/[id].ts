@@ -9,7 +9,7 @@ type Data = {
 
 const query = (id: string) => groq`*[_type == "project" && _id == '${id}'][0] {
     ...,
-    image {
+    heroImage {
       asset->{
         ...,
         metadata

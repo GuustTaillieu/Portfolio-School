@@ -9,8 +9,6 @@ type Props = {
 };
 
 function Skills({ skills }: Props) {
-  console.log(skills);
-
   return (
     <StandardLayout
       title="Skills"

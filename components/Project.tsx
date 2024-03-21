@@ -11,7 +11,8 @@ type Props = {
 };
 
 function Project({ project }: Readonly<Props>) {
-  const projectPicProps = useNextSanityImage(client, project?.image);
+  console.log(project);
+  const projectPicProps = useNextSanityImage(client, project?.heroImage);
   return (
     <div
       key={project?._id}
@@ -28,9 +29,8 @@ function Project({ project }: Readonly<Props>) {
           className="h-full w-full rounded-md object-cover object-profile"
           alt={project?.title}
           {...projectPicProps}
-          layout="fixed"
           placeholder="blur"
-          blurDataURL={project?.image?.asset.metadata?.lqip}
+          blurDataURL={project?.heroImage?.asset.metadata?.lqip}
         />
       </motion.div>
 
