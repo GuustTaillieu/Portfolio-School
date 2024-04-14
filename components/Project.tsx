@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Project } from "@/typings";
 import { useNextSanityImage } from "next-sanity-image";
 import { client } from "@/sanity/lib/client";
 import Link from "next/link";
+import { Project as TProject } from "@/typings";
 
 type Props = {
-  project: Project;
+  project: TProject;
 };
 
 function Project({ project }: Readonly<Props>) {
@@ -16,14 +16,14 @@ function Project({ project }: Readonly<Props>) {
   return (
     <div
       key={project?._id}
-      className="flex h-screen w-full flex-shrink-0 snap-center flex-col items-center justify-center space-y-5 p-20 md:p-44"
+      className="flex h-screen w-full flex-shrink-0 snap-center flex-col items-center justify-center space-y-5 p-4 md:p-20"
     >
       <motion.div
         initial={{ opacity: 0, y: -300 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeInOut" }}
         viewport={{ once: true }}
-        className="xl:w-120 w-72 pt-20 sm:pt-0 lg:w-[500px] xl:w-[600px]"
+        className="xl:w-120 w-full pt-20 sm:pt-0 lg:w-[500px] xl:w-[600px]"
       >
         <Image
           className="h-full w-full rounded-md object-cover object-profile"
@@ -49,7 +49,7 @@ function Project({ project }: Readonly<Props>) {
             {project?.title} <span className="text-primary">→</span>
           </span>
         </Link>
-        <p className="max-w-4xl pt-3 text-center text-lg md:text-center">
+        <p className="max-w-4xl pt-3 text-justify text-lg md:text-center">
           {project?.summary || "No summary available."}
         </p>
       </motion.div>

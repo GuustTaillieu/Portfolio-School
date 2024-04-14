@@ -14,7 +14,7 @@ const Projects = ({ projects, title = "Events" }: Props) => {
       title={title}
       className="relative z-0 mx-auto flex h-screen max-w-full flex-col items-center justify-evenly overflow-hidden text-left md:flex-row"
     >
-      <div className="relative z-20 flex w-full snap-x snap-mandatory overflow-y-hidden overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">
+      <div className="relative z-20 mb-4 flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll scrollbar-thin scrollbar-track-gray-400/30 scrollbar-thumb-primary/80">
         {projects?.map((project) => (
           <Project key={project._id} project={project} />
         ))}

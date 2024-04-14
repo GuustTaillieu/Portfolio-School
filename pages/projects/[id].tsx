@@ -39,10 +39,17 @@ const ProjectPage: NextPage<Props> = ({
 }: Props) => {
   const [loading, setLoading] = useState(true);
   const builder = imageUrlBuilder(client);
+  const topRef = React.useRef<HTMLDivElement>(null);
 
   function urlFor(source: SanityImageSource) {
     return builder.image(source);
   }
+
+  useEffect(() => {
+    if (topRef.current) {
+      topRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [topRef, project]);
 
   useEffect(() => {
     if (loading && pageInfo && project) {
@@ -52,10 +59,12 @@ const ProjectPage: NextPage<Props> = ({
     }
   }, [pageInfo, project, loading]);
 
-  const nextProject = useMemo(() => {
+  const nextProjects = useMemo(() => {
     if (!projects) return [];
-    const index = projects.findIndex((p) => p._id === project._id);
-    return [projects[index + 1] ?? projects[0]];
+    // sort projects so that the current project is not included and the rest are sorted by date (dates before the current project's date will be last)
+    return projects
+      .filter((p) => p._id !== project._id)
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }, [projects, project]);
 
   if (!project) return <LoadingScreen />;
@@ -67,19 +76,19 @@ const ProjectPage: NextPage<Props> = ({
       <main>
         <Header socials={pageInfo.socials} />
 
-        <div key={project._id} className="mt-24">
+        <div ref={topRef} key={project._id} className="">
           <Carousel className="mx-auto w-full max-w-4xl">
             <CarouselContent>
               {project.images.map((image) => (
                 <CarouselItem key={image.asset._ref}>
                   <div className="p-1">
                     <Image
-                      src={urlFor(image).height(500).url() ?? ""}
+                      src={urlFor(image)?.height(500).url() ?? ""}
                       alt={project.title}
                       width={600}
                       height={500}
                       blurDataURL={
-                        urlFor(image).width(500).blur(20).url() ?? ""
+                        urlFor(image)?.width(500).blur(20).url() ?? ""
                       }
                       className="mx-auto aspect-video rounded-md object-cover object-profile"
                     />
@@ -91,10 +100,10 @@ const ProjectPage: NextPage<Props> = ({
             <CarouselNext />
           </Carousel>
 
-          <div className="flex w-full flex-col items-center justify-center space-y-5 px-20 md:px-44">
+          <div className="flex w-full flex-col items-center justify-center space-y-5 px-4 sm:px-20 lg:px-44">
             <motion.div
               initial={{ opacity: 0, y: -50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeInOut" }}
               viewport={{ once: true, amount: "all" }}
               className="max-w-6xl space-y-5 px-0 py-12 md:px-10"
@@ -105,7 +114,7 @@ const ProjectPage: NextPage<Props> = ({
                 </span>
               </h1>
 
-              <div className="max-w-4xl pt-3">
+              <div className="mx-auto max-w-4xl pt-3">
                 {project?.description.split("\n").map((text) => (
                   <p
                     key={text}
@@ -124,7 +133,7 @@ const ProjectPage: NextPage<Props> = ({
           </div>
         </div>
         <div className="pt-10">
-          <Projects projects={nextProject} title="Other events" />
+          <Projects projects={nextProjects} title="Other events" />
         </div>
 
         <Link href="/" className="absolute bottom-10 left-10" title="Back home">
