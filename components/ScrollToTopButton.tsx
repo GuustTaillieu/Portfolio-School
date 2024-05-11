@@ -1,5 +1,7 @@
+"use client";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/solid";
 import React from "react";
+import { useScroll } from "framer-motion";
 
 type Props = {
   topElem: React.RefObject<HTMLDivElement>;

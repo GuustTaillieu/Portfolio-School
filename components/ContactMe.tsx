@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import StandardLayout from "./StandardLayout";
 import { PhoneIcon, EnvelopeIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,8 +17,8 @@ type Props = {
 };
 
 function ContactMe({ info }: Props) {
-  const emailStatus = useRef<true | false | null>(null);
-  const { register, handleSubmit } = useForm<Inputs>();
+  const [emailStatus, setEmailStatus] = useState<boolean | null>(null);
+  const { register, handleSubmit, reset } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (formData) => {
     if (
       !formData.from_name ||
@@ -35,7 +35,8 @@ function ContactMe({ info }: Props) {
         "K1iKT5M2YpJgK445h",
       )
       .then((result) => {
-        emailStatus.current = result.status === 200;
+        setEmailStatus(true);
+        reset();
       });
   };
 
@@ -124,13 +125,13 @@ function ContactMe({ info }: Props) {
           >
             Submit
           </button>
-          {emailStatus.current !== null && (
+          {emailStatus !== null && (
             <p
               className={`-mb-24 w-full rounded-md py-3 text-center text-black ${
-                emailStatus.current ? "bg-green-500" : "bg-red-500"
+                emailStatus ? "bg-green-500" : "bg-red-500"
               }`}
             >
-              {emailStatus.current ? "Email sent!" : "Email failed to send."}
+              {emailStatus ? "Email sent!" : "Email failed to send."}
             </p>
           )}
         </form>

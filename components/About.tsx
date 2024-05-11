@@ -12,20 +12,21 @@ type Props = {
 
 const About = ({ info }: Props) => {
   const profilePicProps = useNextSanityImage(client, info.profilePicture);
+  const text = { __html: info?.backgroundInformation || "" };
 
   return (
     <StandardLayout
       title="About"
-      className="relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-evenly px-10 text-center md:flex-row md:text-left"
+      className="relative mx-auto flex h-screen max-w-7xl flex-col items-center justify-center gap-y-8 px-4 text-center sm:px-10 lg:flex-row lg:text-left"
     >
       <motion.div
         initial={{ x: -200, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut" }}
-        className="md:h-95 -mb-24 h-56 w-56 flex-shrink-0 md:mb-0 md:h-72 md:w-64 xl:h-[500px] xl:w-[400px]"
+        className="md:h-95 h-40 w-40 flex-shrink-0 sm:h-56 sm:w-56 md:mb-0 lg:h-72 lg:w-64 xl:h-[500px] xl:w-[400px]"
       >
         <Image
-          className="h-full w-full rounded-full object-cover object-profile md:rounded-lg"
+          className="h-full w-full rounded-full object-cover object-profile lg:rounded-lg"
           alt="Profile Picture"
           {...profilePicProps}
           layout="fixed"
@@ -47,7 +48,9 @@ const About = ({ info }: Props) => {
           </span>{" "}
           background
         </h4>
-        <p className="text-base">{info?.backgroundInformation}</p>
+        <p className="text-base" dangerouslySetInnerHTML={text}>
+          {}
+        </p>
       </motion.div>
     </StandardLayout>
   );

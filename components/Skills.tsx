@@ -23,6 +23,7 @@ function Skills({ skills }: Props) {
           <Skill
             key={skill._id}
             logo={skill.skillImage}
+            skillPercentage={skill.progress}
             direction={i < Math.round(skills.length / 2) ? "left" : "right"}
           />
         ))}

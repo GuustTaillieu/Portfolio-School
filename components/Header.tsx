@@ -11,7 +11,10 @@ function Header({ socials }: Props) {
   function handleToContactClick(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault();
     const contactForm = document.getElementById("contact");
-    if (!contactForm) return;
+    if (!contactForm) {
+      window.location.href = "mailto:guust.taillieu@student.howest.be";
+      return;
+    }
     contactForm.scrollIntoView({ behavior: "smooth" });
     window.history.pushState({}, "", "/#contact");
   }

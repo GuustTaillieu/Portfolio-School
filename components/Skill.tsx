@@ -8,9 +8,14 @@ import { client } from "@/sanity/lib/client";
 type Props = {
   logo: ImageType;
   direction?: "left" | "right";
+  skillPercentage: number | null;
 };
 
-function Skill({ logo, direction = "right" }: Readonly<Props>) {
+function Skill({
+  logo,
+  direction = "right",
+  skillPercentage,
+}: Readonly<Props>) {
   const logoProps = useNextSanityImage(client, logo);
 
   return (
@@ -30,7 +35,9 @@ function Skill({ logo, direction = "right" }: Readonly<Props>) {
       />
       <div className="absolute left-0 top-0 z-0 aspect-square h-full w-full rounded-full opacity-0 transition duration-300 ease-in-out group-hover:bg-white group-hover:opacity-80">
         <div className="flex h-full items-center justify-center">
-          <p className="text-3xl font-bold text-black opacity-100">100%</p>
+          <p className="text-3xl font-bold text-black opacity-100">
+            {skillPercentage ?? 0}%
+          </p>
         </div>
       </div>
     </motion.div>
